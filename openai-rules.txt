@@ -1,0 +1,10 @@
+[AutoProxy 0.2.9]
+! Title: OpenAI and ChatGPT only
+! Source: https://raw.githubusercontent.com/gfwlist/gfwlist/master/gfwlist.txt
+||chatgpt.com
+||files.oaiusercontent.com
+||oaistatic.com
+||oaistatsig.com
+||oaiusercontent.com
+||openai.com
+||openaimerge.com
