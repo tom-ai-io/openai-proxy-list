@@ -18,10 +18,26 @@ CORE_RULES = {
     "||openaimerge.com",
 }
 
+# Muse (Meta's personal agent, https://muse.ai) is geo-gated to the US. Keeping it
+# in the same subscription means one rule set covers every AI service that has to
+# leave Hong Kong. Domains come from muse.ai's own CSP (2026-11-09) plus the ones
+# SagerNet's AI category lists. facebook.com / instagram.com are deliberately NOT
+# included: they work from Hong Kong and would proxy unrelated traffic.
+MUSE_RULES = {
+    "||muse.ai",
+    "||meta.ai",
+    "||metaaiusercontent.com",
+    "||metaaivm.com",
+    "||ecto1usercontent.com",
+    "||auth.meta.com",
+}
+
 HOST_RE = re.compile(
     r"(?i)(?<![a-z0-9-])(?:[a-z0-9-]+\.)*"
     r"(?:openai\.com|chatgpt\.com|oaistatic\.com|oaistatsig\.com|"
-    r"oaiusercontent\.com|openaimerge\.com)(?=$|[/^:*?|])"
+    r"oaiusercontent\.com|openaimerge\.com|muse\.ai|meta\.ai|"
+    r"metaaiusercontent\.com|metaaivm\.com|ecto1usercontent\.com|"
+    r"auth\.meta\.com)(?=$|[/^:*?|])"
 )
 
 
@@ -47,13 +63,14 @@ def main() -> None:
         and HOST_RE.search(line)
     }
     rules.update(CORE_RULES)
+    rules.update(MUSE_RULES)
     if not rules:
-        raise RuntimeError("no OpenAI rules were found")
+        raise RuntimeError("no OpenAI or Muse rules were found")
 
     decoded = "\n".join(
         [
             "[AutoProxy 0.2.9]",
-            "! Title: OpenAI and ChatGPT only",
+            "! Title: OpenAI, ChatGPT and Muse AI",
             f"! Source: {SOURCE_URL}",
             *sorted(rules),
             "",

@@ -1,7 +1,7 @@
-# OpenAI Proxy List
+# OpenAI + Muse AI Proxy List
 
-A small AutoProxy/GFWList-compatible subscription containing first-party OpenAI
-and ChatGPT domains only.
+A small AutoProxy/GFWList-compatible subscription covering the AI services that are
+geo-gated away from Hong Kong: first-party OpenAI/ChatGPT domains and Meta's Muse.
 
 ## Subscription URL
 
@@ -20,7 +20,7 @@ your proxy profile. Keep the default rule as Direct.
 
 ## What it includes
 
-The list covers first-party suffixes declared by OpenAI:
+OpenAI / ChatGPT:
 
 - `chatgpt.com`
 - `oaistatic.com`
@@ -28,6 +28,19 @@ The list covers first-party suffixes declared by OpenAI:
 - `oaiusercontent.com`
 - `openai.com`
 - `openaimerge.com`
+
+Muse (Meta's personal agent, <https://muse.ai>):
+
+- `muse.ai`
+- `meta.ai`
+- `metaaiusercontent.com`
+- `metaaivm.com`
+- `ecto1usercontent.com`
+- `auth.meta.com`
+
+The Muse host set comes from muse.ai's own CSP header and SagerNet's AI category
+(checked 2026-11-09). `facebook.com` and `instagram.com` are intentionally excluded:
+they work from Hong Kong and would proxy unrelated traffic.
 
 The generator also extracts matching rules from the upstream
 [GFWList](https://github.com/gfwlist/gfwlist) and writes both a readable and
