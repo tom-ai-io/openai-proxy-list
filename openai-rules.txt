@@ -1,11 +1,10 @@
 [AutoProxy 0.2.9]
-! Title: OpenAI, ChatGPT, Muse AI and Stripe
+! Title: OpenAI, ChatGPT and Muse AI
 ! Source: https://raw.githubusercontent.com/gfwlist/gfwlist/master/gfwlist.txt
 ||auth.meta.com
 ||chatgpt.com
 ||ecto1usercontent.com
 ||files.oaiusercontent.com
-||js.stripe.com
 ||meta.ai
 ||metaaiusercontent.com
 ||metaaivm.com
