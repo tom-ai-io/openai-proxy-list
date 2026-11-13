@@ -1,7 +1,8 @@
-# OpenAI + Muse AI Proxy List
+# OpenAI + Muse AI + Stripe Proxy List
 
 A small AutoProxy/GFWList-compatible subscription covering the AI services that are
-geo-gated away from Hong Kong: first-party OpenAI/ChatGPT domains and Meta's Muse.
+geo-gated away from Hong Kong: first-party OpenAI/ChatGPT domains, Meta's Muse,
+and the Stripe host used by ChatGPT.
 
 ## Subscription URL
 
@@ -42,12 +43,20 @@ The Muse host set comes from muse.ai's own CSP header and SagerNet's AI category
 (checked 2026-11-09). `facebook.com` and `instagram.com` are intentionally excluded:
 they work from Hong Kong and would proxy unrelated traffic.
 
+Stripe dependency used by ChatGPT:
+
+- `js.stripe.com`
+
+This host follows OpenAI's
+[network recommendations](https://help.openai.com/en/articles/9247338-network-recommendations-for-chatgpt-errors-on-web-and-apps)
+(checked 2026-11-13).
+
 The generator also extracts matching rules from the upstream
 [GFWList](https://github.com/gfwlist/gfwlist) and writes both a readable and
 Base64 subscription file.
 
 Third-party services listed in OpenAI's network guidance, such as WorkOS,
-Intercom, Stripe, Sentry, Datadog, SendGrid, and Cloudflare, are intentionally
+Intercom, Sentry, Datadog, SendGrid, and Cloudflare, are intentionally
 excluded so this subscription does not proxy unrelated traffic.
 
 ## Daily update

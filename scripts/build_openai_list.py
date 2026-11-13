@@ -18,6 +18,10 @@ CORE_RULES = {
     "||openaimerge.com",
 }
 
+STRIPE_RULES = {
+    "||js.stripe.com",
+}
+
 # Muse (Meta's personal agent, https://muse.ai) is geo-gated to the US. Keeping it
 # in the same subscription means one rule set covers every AI service that has to
 # leave Hong Kong. Domains come from muse.ai's own CSP (2026-11-09) plus the ones
@@ -37,7 +41,7 @@ HOST_RE = re.compile(
     r"(?:openai\.com|chatgpt\.com|oaistatic\.com|oaistatsig\.com|"
     r"oaiusercontent\.com|openaimerge\.com|muse\.ai|meta\.ai|"
     r"metaaiusercontent\.com|metaaivm\.com|ecto1usercontent\.com|"
-    r"auth\.meta\.com)(?=$|[/^:*?|])"
+    r"auth\.meta\.com|js\.stripe\.com)(?=$|[/^:*?|])"
 )
 
 
@@ -63,14 +67,15 @@ def main() -> None:
         and HOST_RE.search(line)
     }
     rules.update(CORE_RULES)
+    rules.update(STRIPE_RULES)
     rules.update(MUSE_RULES)
     if not rules:
-        raise RuntimeError("no OpenAI or Muse rules were found")
+        raise RuntimeError("no OpenAI, Muse, or Stripe rules were found")
 
     decoded = "\n".join(
         [
             "[AutoProxy 0.2.9]",
-            "! Title: OpenAI, ChatGPT and Muse AI",
+            "! Title: OpenAI, ChatGPT, Muse AI and Stripe",
             f"! Source: {SOURCE_URL}",
             *sorted(rules),
             "",
